@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.gap.domain" >
+	<class name="Order" table="t_order" >
+		<id name="id_order"  >
+			<generator class="native"></generator>
+		</id>
+		<property name="sellerzl" ></property>
+		<property name="sellerid" ></property>
+		<property name="buyerzl" ></property>
+		<property name="buyerid" ></property>
+		<property name="productid" ></property>
+		<property name="buynumber" ></property>
+		<property name="id_shop" ></property>
+		<property name="conditon_order" ></property>		
+		<property name="buyPrice" ></property>
+		<property name="buyUnit" ></property>
+		<property name="productName" ></property>
+		
+	</class>
+</hibernate-mapping>

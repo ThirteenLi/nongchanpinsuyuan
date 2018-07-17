@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.gap.domain" >
+	<class name="Administrator" table="t_manager" >
+		<id name="id_gly"  >
+			<generator class="native"></generator>
+		</id>
+		<property name="username_gly" ></property>
+		<property name="password_gly" ></property>
+
+	</class>
+</hibernate-mapping>

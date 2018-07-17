@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.gap.domain" >
+	<class name="Customer" table="t_customer" >
+		<id name="id_cus"  >
+			<generator class="native"></generator>
+		</id>
+		<property name="phoneNumber_cus" ></property>
+		<property name="nickName_cus" ></property>
+		<property name="password_cus" ></property>
+		<property name="address_cus" ></property>
+		<property name="gender_cus" ></property>
+		<property name="birthday_cus" ></property>
+		<property name="photo_cus" ></property>
+		<property name="condition_cus" ></property>		
+		<property name="email_cus" ></property>	
+	</class>
+</hibernate-mapping>

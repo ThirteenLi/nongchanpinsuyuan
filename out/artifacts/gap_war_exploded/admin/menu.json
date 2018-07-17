@@ -1,0 +1,53 @@
+{
+   "menus" : [{"icon" : "icon-sys","menuid" : "1","menuname" : "农户管理","url" : "","menus" : [
+                 {"icon" : "icon-log","menuid" : "1_1","menuname" : "农户用户管理","url" : "views/farmer.jsp"
+                 },
+                 {"icon" : "icon-log","menuid" : "1_1","menuname" : "新农户审核","url" : "views/farmerCheck.jsp"
+                 },
+                 {"icon" : "icon-log","menuid" : "1_1","menuname" : "农场管理", "url" : "views/fNongchang.jsp"
+                 },
+                 {"icon" : "icon-log","menuid" : "1_1","menuname" : "农场申请管理","url" : "views/fCheckNC.jsp"
+                 }
+           
+                ]
+               },
+               
+               
+               {"icon" : "icon-sys","menuid" : "1","menuname" : "代理商管理","url" : "","menus" : [
+                 {"icon" : "icon-log","menuid" : "1_1","menuname" : "代理商用户管理","url" : "views/agent1.jsp"
+                 },
+                 {"icon" : "icon-log","menuid" : "1_1","menuname" : "新代理商审核","url" : "views/agent1Check.jsp"
+                 },
+                 {"icon" : "icon-log","menuid" : "1_1","menuname" : "代理点管理","url" : "views/aShop.jsp"
+                 },
+                 {"icon" : "icon-log","menuid" : "1_1","menuname" : "代理商请求管理","url" : "views/aCheckShop.jsp"
+                 }
+                ]
+               },
+
+
+ 	           {"icon" : "icon-sys","menuid" : "1","menuname" : "消费者管理","url" : "","menus" : [
+                 {"icon" : "icon-log","menuid" : "1_1","menuname" : "消费者用户管理","url" : "views/customer.jsp"
+                 }
+                ]
+               },
+               
+               
+              {"icon" : "icon-sys","menuid" : "1","menuname" : "质检员管理","url" : "","menus" : [
+                 {"icon" : "icon-log","menuid" : "1_1","menuname" : "质检员管理","url" : "views/checker.jsp"
+                 }
+                ]
+               },
+               
+               
+               
+               
+              {"icon" : "icon-sys","menuid" : "1","menuname" : "用户意见管理","url" : "","menus" : [
+                 {"icon" : "icon-log","menuid" : "1_1","menuname" : "申请管理","url" : "views/shenqing.jsp"
+                 }
+              
+              
+                ]
+               }
+             ]          
+}

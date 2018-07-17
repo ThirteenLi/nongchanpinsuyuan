@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.gap.domain" >
+	<class name="Checker" table="t_checker" >
+		<id name="id_zjy"  >
+			<generator class="native"></generator>
+		</id>
+		<property name="username_zjy" ></property>
+		<property name="password_zjy" ></property>
+		<property name="realName_zjy" ></property>
+		<property name="phone_zjy" ></property>
+		<property name="qq_zjy" ></property>
+		<property name="condition_zjy" ></property>
+
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+	
+<struts>
+	<!-- 将action的创建交给spring容器,spring负责装配Action依赖属性-->
+	<constant name="struts.objectFactory" value="spring"></constant>
+
+	<package name="crm" namespace="/" extends="struts-default" >
+		
+<!--  		<interceptors>
+			<interceptor name="privilegeInterceptor" class="com.gap.web.interceptor.PrivilegeInterceptor"></interceptor>	
+			<interceptor-stack name="myStack">
+				<interceptor-ref name="privilegeInterceptor">
+					<param name="excludeMethods">loginAdministrator,loginCustomer,loginFarmer,loginAgent,
+					checkPhoneNumber,registNewCustomer,registNewAgent,registNewFarmer</param>
+				</interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		
+		<default-interceptor-ref name="myStack"></default-interceptor-ref> -->
+ <!--		
+ 不能启用
+		<global-results>
+			<result name="toLogin" type="redirect" >/login.jsp</result>
+		</global-results>
+-->		
+<!-- 		<global-exception-mappings>
+			<exception-mapping result="error" exception="java.lang.RuntimeException"></exception-mapping>
+		</global-exception-mappings>
+ -->	
+		
+		<global-exception-mappings>
+			<exception-mapping result="error" exception="java.lang.RuntimeException"></exception-mapping>
+			<exception-mapping result="byCodeError" exception="java.lang.RuntimeException"></exception-mapping>
+			<exception-mapping result="FarmerRegisterror" exception="java.lang.RuntimeException"></exception-mapping>
+			<exception-mapping result="FarmerChangePassworderror" exception="java.lang.RuntimeException"></exception-mapping>
+			<exception-mapping result="FarmerChangePassworderror" exception="java.lang.RuntimeException"></exception-mapping>
+			<exception-mapping result="AgentChangePassworderror" exception="java.lang.RuntimeException"></exception-mapping>
+			
+		</global-exception-mappings>
+ 
+		<action name="CustomerAction_*" class="customerAction" method="{1}" >
+			<result name="toLogin" >/customer/homepage.jsp</result>
+			<result name="error">/customer/customerLogin.jsp</result>
+			<result name="sccessRegist">/customer/customerLogin.jsp</result>
+			<result name="noAdmin">/admin/adminLogin.jsp</result>
+			
+		</action>
+		
+		<action name="FarmerAction_*" class="farmerAction" method="{1}" >
+			<result name="toLogin" >/farmer/homepage.jsp</result>
+			<result name="error">/farmer/farmerLogin.jsp</result>
+			<result name="sccessRegist">/farmer/farmerLogin.jsp</result>
+			<result name="noAdmin">/admin/adminLogin.jsp</result>
+			<result name="FarmerRegisterror">/register/farmerRegister.jsp</result>
+			<result name="sccessSubmitId">/farmer/farmerLogin.jsp</result>
+			<result name="toRealName">/farmer/submitIDImage.jsp</result>		
+			<result name="changeFarmerPassword">/farmer/info/farmerInfoAndChange.jsp</result>
+			<result name="FarmerChangePassworderror">/farmer/info/changePassword.jsp</result>
+		</action>
+	
+		<action name="AgentAction_*" class="agentAction" method="{1}" >
+			<result name="toLogin" >/agent/homepage.jsp</result>
+			<result name="error">/agent/homepage.jsp</result>
+			<result name="sccessRegist">/agent/agentLogin.jsp</result>
+			<result name="noAdmin">/admin/adminLogin.jsp</result>
+			<result name="changeAgentPassword">/agent/info/agentInfoAndChange.jsp</result>
+			<result name="AgentChangePassworderror">/agent/info/changePassword.jsp</result>
+			
+		</action>
+
+		<action name="AdministratorAction_*" class="administratorAction" method="{1}" >	
+			<result name="adminLogin">/admin/adminHomepage.jsp</result>
+			<result name="noAdmin">/admin/adminLogin.jsp</result>
+			<result name="error">/admin/adminLogin.jsp</result>
+		</action>	
+		
+		<action name="CheckerAction_*" class="checkerAction" method="{1}" >	
+			<result name="checkLogin">/checker/checkerHomepage.jsp</result>
+			<result name="noAdmin">/admin/adminLogin.jsp</result>
+			<result name="error">/admin/adminLogin.jsp</result>
+		</action>	
+
+		<action name="NongchangAction_*" class="nongchangAction" method="{1}" >	
+			<result name="list">/farmer/nongchang/nongchangAdmin.jsp</result>
+			<result name="jumpToAdd">/farmer/inputProduct.jsp</result>		
+		</action>		
+
+
+		<action name="ShopAction_*" class="shopAction" method="{1}" >	
+			<result name="list">/agent/shop/shopAdmin.jsp</result>
+			<result name="jumpToAdd">/farmer/inputProduct.jsp</result>		
+		</action>	
+	
+	                                                    
+		<action name="ProductAction_*" class="ProductAction" method="{1}" >	
+			<result name="searchOriginInformation">/originInformation.jsp</result>	
+			<result name="error">/Search.jsp</result>				
+			<result name="searchOriginInformation">/originInformation.jsp</result>	
+			<result name="nhaddsuccess">/farmer/homepage.jsp</result>
+			<result name="dlsaddsuccess">/farmer/homepage.jsp</result>
+			<result name="dlsaddsuccess1">/agent/homepage.jsp</result>
+			
+			<result name="NHGetRepository">/farmer/repository/repositoryAdmin.jsp</result>	
+			<result name="dlsGetRepository">/agent/repository/repositoryAdmin.jsp</result>
+			<result name="NHGetOneProduct">/farmer/repository/changeProduct.jsp</result>
+			<result name="DLSGetOneProduct">/agent/repository/changeProduct.jsp</result>
+			<result name="NHModifyProductInfo">/farmer/homepage.jsp</result>
+			<result name="DLSModifyProductInfo">/agent/homepage.jsp</result>
+			
+			<result name="generateQRC">/farmer/repository/QRCode.jsp</result>
+			<result name="AgentSearch">/agent/buy/buyApply.jsp</result>	
+			<result name="applyToBuy">/agent/buy/inputProduct.jsp</result>			
+		</action>	
+	
+	
+		<action name="ApplyAction_*" class="applyAction" method="{1}" >	
+			<result name="nhapplysuccess">/farmer/nongchang/nongchangAdmin.jsp</result>	
+			<result name="dlsapplysuccess">/agent/shop/shopAdmin.jsp</result>	
+			
+			<result name="nhToScheduleList">/farmer/nongchang/applySchedule.jsp</result>	
+			<result name="dlsToScheduleList">/agent/shop/applySchedule.jsp</result>	
+			
+			<result name="farmerContectAdmin">/farmer/homepage.jsp</result>	
+			<result name="agentrContectAdmin">/agent/homepage.jsp</result>	
+			
+			
+			<result name="farmerApplyChange">/farmer/info/farmerInfoAndChange.jsp</result>	
+			<result name="agentApplyChange">/agent/info/agentInfoAndChange.jsp</result>
+								
+		</action>	
+	
+	
+		<action name="OrderAction_*" class="orderAction" method="{1}" >	
+			<result name="writeOrder">/agent/homepage.jsp</result>
+				
+			<result name="searchAllOrder">/farmer/order/orderAdmin.jsp</result>	
+			<result name="searchAlldlsOrder">/agent/order/orderAdmin.jsp</result>
+			
+			<result name="NHGetOneOrder">/farmer/order/inputProduct.jsp</result>	
+			<result name="DLSGetOneOrder">/agent/order/inputProduct.jsp</result>		
+		</action>	
+	
+	
+	
+		<action name="QualityAction_*" class="qualityAction" method="{1}" >	
+			<result name="searchQuality">/qualityInfo.jsp</result>
+			<result name="error">/qualityInfo.jsp</result>
+		</action>
+	
+	
+	
+	
+	</package>
+</struts>
+	

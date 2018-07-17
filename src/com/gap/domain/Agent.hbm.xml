@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.gap.domain" >
+	<class name="Agent" table="t_agent" >
+		<id name="id_dls"  >
+			<generator class="native"></generator>
+		</id>
+		<property name="phoneNumber_dls" ></property>
+		<property name="password_dls" ></property>
+		<property name="realName_dls" ></property>
+		<property name="gender_dls" ></property>
+		<property name="email_dls" ></property>
+		<property name="IDCardNum_dls" ></property>
+		<property name="pictureIDCF_dls" ></property>
+		<property name="pictureIDCB_dls" ></property>		
+		<property name="pictureIDC_dls" ></property>	
+		<property name="condition_dls" ></property>	
+		
+	</class>
+</hibernate-mapping>

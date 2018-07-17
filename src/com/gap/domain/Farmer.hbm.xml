@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.gap.domain" >
+	<class name="Farmer" table="t_farmer" >
+		<id name="id_nh"  >
+			<generator class="native"></generator>
+		</id>
+		<property name="phoneNumber_nh" ></property>
+		<property name="password_nh" ></property>
+		<property name="email_nh" ></property>
+		<property name="IDCardNum_nh" ></property>
+		<property name="realName_nh" ></property>
+		<property name="gender_nh" ></property>
+		<property name="pictureIDCF_nh" ></property>
+		<property name="pictureIDCB_nh" ></property>		
+		<property name="pictureIDC_nh" ></property>	
+		<property name="condition_nh" ></property>	
+		
+		<set name="nongchangs" lazy="false">
+			<key column="id_nh_ncfarm"></key>
+			<one-to-many class="Nongchang" />
+		</set>
+		
+	</class>
+</hibernate-mapping>

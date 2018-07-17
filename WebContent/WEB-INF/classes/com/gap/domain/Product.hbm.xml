@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.gap.domain" >
+	<class name="Product" table="t_repositoryproduct" >
+		<id name="id_rep"  >
+			<generator class="native"></generator>
+		</id>
+		<property name="idHead_rep" ></property>
+		<property name="productId_rep" ></property>
+		<property name="userCategory_reo" ></property>
+		<property name="idOwner_rep" ></property>
+		<property name="idPlace_rep" ></property>
+		<property name="name_rep" ></property>
+		<property name="number_rep" ></property>
+		<property name="reduceNum_rep" ></property>		
+		<property name="buyUnit_rep" ></property>	
+		<property name="buyPrice_rep" ></property>	
+		<property name="sellUnit_rep" ></property>	
+		<property name="sellPrice_rep" ></property>	
+		
+<!-- 	    以element内容升序返回
+	    <set name="productId_rep" order-by="productId_rep desc">
+	      <key column="team_id"></key>
+	      
+	    </set> -->
+
+		
+	</class>
+</hibernate-mapping>

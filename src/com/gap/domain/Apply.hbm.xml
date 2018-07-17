@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.gap.domain" >
+	<class name="Apply" table="t_apply" >
+		<id name="id_message"  >
+			<generator class="native"></generator>
+		</id>
+		<property name="usercategory" ></property>
+		<property name="userid" ></property>
+		<property name="applycategory" ></property>
+		<property name="userapply" ></property>
+		<property name="zt" ></property>
+		
+	</class>
+</hibernate-mapping>

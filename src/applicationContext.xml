@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns="http://www.springframework.org/schema/beans" 
+		xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:aop="http://www.springframework.org/schema/aop" 
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd 
+							http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd 
+							http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd 
+							http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd ">
+	
+	<!-- 读取db.properties文件 -->
+	<context:property-placeholder location="classpath:db.properties" />
+	
+	<!-- 配置c3p0连接池 -->
+	<bean name="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" >
+		<property name="jdbcUrl" value="${jdbc.jdbcUrl}" ></property>
+		<property name="driverClass" value="${jdbc.driverClass}" ></property>
+		<property name="user" value="${jdbc.user}" ></property>
+		<property name="password" value="${jdbc.password}" ></property>
+	</bean>
+	
+	
+	
+	<!-- 核心事务管理器 -->
+	<bean name="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager" >
+		<property name="sessionFactory" ref="sessionFactory" ></property>
+	</bean>
+	
+	<!-- 配置通知 -->
+	 <tx:advice id="txAdvice" transaction-manager="transactionManager" >
+		<tx:attributes>
+			<tx:method name="save*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="false" />
+			<tx:method name="persist*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="false" />
+			<tx:method name="update*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="false" />
+			<tx:method name="modify*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="false" />
+			<tx:method name="delete*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="false" />
+			<tx:method name="remove*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="false" />
+			<tx:method name="get*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="true" />
+			<tx:method name="find*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="true" />
+			<tx:method name="*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="false" />
+		</tx:attributes>
+	</tx:advice> 
+	
+	<!-- 配置将通知织入目标对象,配置切点,配置切面 -->
+	 <aop:config>
+		<aop:pointcut expression="execution(* com.gap.service.impl.*ServiceImpl.*(..))" id="txPc"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="txPc" />
+	</aop:config> 
+
+	
+
+	<!-- 将SessionFactory配置到spring容器中 --><!-- 在spring配置中放置hibernate配置信息 -->
+	<bean name="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean" >	
+		<property name="dataSource" ref="dataSource" ></property>  <!-- 将连接池注入到sessionFactory, hibernate会通过连接池获得连接 -->
+		<property name="hibernateProperties">  <!-- 配置hibernate基本信息 -->
+			<props>
+				<prop key="hibernate.dialect" >org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql" >true</prop>
+				<prop key="hibernate.format_sql" >true</prop>
+				<prop key="hibernate.hbm2ddl.auto" >update</prop>
+			</props>
+		</property>
+		<!-- 引入orm元数据,指定orm元数据所在的包路径,spring会自动读取包中的所有配置 -->
+		<property name="mappingDirectoryLocations" value="classpath:com/gap/domain" ></property>
+	</bean>
+	
+	
+	
+	
+	<!-- action --><!-- 注意:Action对象作用范围一定是多例的.这样才符合struts2架构 -->
+	<bean name="customerAction" class="com.gap.web.action.CustomerAction" scope="prototype" >
+		<property name="cs" ref="customerService" ></property>
+	</bean> 
+	<bean name="farmerAction" class="com.gap.web.action.FarmerAction" scope="prototype" >
+		<property name="fs" ref="farmerService" ></property>
+	</bean> 	
+	<bean name="agentAction" class="com.gap.web.action.AgentAction" scope="prototype" >
+		<property name="as" ref="agentService" ></property>
+	</bean> 
+	<bean name="administratorAction" class="com.gap.web.action.AdministratorAction" scope="prototype" >
+		<property name="admins" ref="administratorService" ></property>
+	</bean>
+	<bean name="checkerAction" class="com.gap.web.action.CheckerAction" scope="prototype" >
+		<property name="checkers" ref="checkerService" ></property>
+	</bean>	
+	<bean name="nongchangAction" class="com.gap.web.action.NongchangAction" scope="prototype" >
+		<property name="nongchangs" ref="nongchangService" ></property>
+	</bean>		            
+	<bean name="ProductAction" class="com.gap.web.action.ProductAction" scope="prototype" >
+		<property name="productService" ref="productService" ></property>
+		<property name="shopService" ref="shopService" ></property>
+	</bean>	
+	<bean name="applyAction" class="com.gap.web.action.ApplyAction" scope="prototype" >
+		<property name="applyService" ref="applyService" ></property>
+	</bean>	
+	<bean name="shopAction" class="com.gap.web.action.ShopAction" scope="prototype" >
+		<property name="shopService" ref="shopService" ></property>
+	</bean>		
+	<bean name="orderAction" class="com.gap.web.action.OrderAction" scope="prototype" >
+		<property name="orderService" ref="orderService" ></property>
+	</bean>			
+	<bean name="qualityAction" class="com.gap.web.action.QualityAction" >
+		<property name="qualityService" ref="qualityService" ></property>
+	</bean>	
+	
+	
+	<!-- service -->
+	<bean name="customerService" class="com.gap.service.impl.CustomerServiceImpl" >
+		<property name="cd" ref="customerDao" ></property>
+	</bean>
+	<bean name="farmerService" class="com.gap.service.impl.FarmerServiceImpl" >
+		<property name="fd" ref="farmerDao" ></property>
+	</bean>
+	<bean name="agentService" class="com.gap.service.impl.AgentServiceImpl" >
+		<property name="ad" ref="agentDao" ></property>
+	</bean>	
+	<bean name="administratorService" class="com.gap.service.impl.AdministratorServiceImpl" >
+		<property name="admind" ref="administratorDao" ></property>
+	</bean>	
+	<bean name="checkerService" class="com.gap.service.impl.CheckerServiceImpl" >
+		<property name="checkerd" ref="checkerDao" ></property>
+	</bean>	
+	<bean name="nongchangService" class="com.gap.service.impl.NongchangServiceImpl" >
+		<property name="ncd" ref="nongchangDao" ></property>
+	</bean>	
+	<bean name="productService" class="com.gap.service.impl.ProductServiceImpl" >
+		<property name="productDao" ref="productDao" ></property>
+		<property name="nongchangDao" ref="nongchangDao" ></property>
+		<property name="shopDao" ref="shopDao" ></property>
+		<property name="orderDao" ref="orderDao" ></property>
+	</bean>	
+	<bean name="applyService" class="com.gap.service.impl.ApplyServiceImpl" >
+		<property name="applyDao" ref="applyDao" ></property>
+	</bean>		
+	<bean name="shopService" class="com.gap.service.impl.ShopServiceImpl" >
+		<property name="shopDao" ref="shopDao" ></property>
+	</bean>		
+	<bean name="orderService" class="com.gap.service.impl.OrderServiceImpl" >
+		<property name="orderDao" ref="orderDao" ></property>
+	</bean>	
+	<bean name="qualityService" class="com.gap.service.impl.QualityServiceImpl" >
+		<property name="qualityDao" ref="qualityDao" ></property>
+	</bean>	
+	
+	<!-- dao -->
+ 	<bean name="customerDao" class="com.gap.dao.impl.CustomerDaoImpl" >
+		<property name="sessionFactory" ref="sessionFactory" ></property>
+	</bean>
+	<bean name="farmerDao" class="com.gap.dao.impl.FarmerDaoImpl" >
+		<property name="sessionFactory" ref="sessionFactory" ></property>
+	</bean>
+	<bean name="agentDao" class="com.gap.dao.impl.AgentDaoImpl" >
+		<property name="sessionFactory" ref="sessionFactory" ></property>
+	</bean>
+	<bean name="administratorDao" class="com.gap.dao.impl.AdministratorDaoImpl" >
+		<property name="sessionFactory" ref="sessionFactory" ></property>
+	</bean>
+	<bean name="checkerDao" class="com.gap.dao.impl.CheckerDaoImpl" >
+		<property name="sessionFactory" ref="sessionFactory" ></property>
+	</bean>
+	<bean name="nongchangDao" class="com.gap.dao.impl.NongchangDaoImpl" >
+		<property name="sessionFactory" ref="sessionFactory" ></property>
+	</bean>	
+	<bean name="productDao" class="com.gap.dao.impl.ProductDaoImpl" >
+		<property name="sessionFactory" ref="sessionFactory" ></property>
+	</bean>
+	<bean name="applyDao" class="com.gap.dao.impl.ApplyDaoImpl" >
+		<property name="sessionFactory" ref="sessionFactory" ></property>
+	</bean>
+	<bean name="shopDao" class="com.gap.dao.impl.ShopDaoImpl" >
+		<property name="sessionFactory" ref="sessionFactory" ></property>
+	</bean>
+	<bean name="orderDao" class="com.gap.dao.impl.OrderDaoImpl" >
+		<property name="sessionFactory" ref="sessionFactory" ></property>
+	</bean>
+	<bean name="qualityDao" class="com.gap.dao.impl.QualityDaoImpl" >
+		<property name="sessionFactory" ref="sessionFactory" ></property>
+	</bean>
+</beans>

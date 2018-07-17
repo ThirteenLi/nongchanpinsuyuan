@@ -1,0 +1,12 @@
+{
+   "menus" : [{"icon" : "icon-sys","menuid" : "1","menuname" : "质量信息管理","url" : "","menus" : [
+                 {"icon" : "icon-log","menuid" : "1_1","menuname" : "质量信息管理","url" : "views/checker.jsp"
+                 }
+           
+                ]
+               }
+               
+               
+
+             ]          
+}

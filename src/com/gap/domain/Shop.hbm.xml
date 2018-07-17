@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.gap.domain" >
+	<class name="Shop" table="t_shop">
+		<id name="id_shop"  >
+			<generator class="native"></generator>
+		</id>
+		<property name="name_shop"  ></property>
+		<property name="address_shop"  ></property>
+		<property name="traffic_shop"  ></property>
+		<property name="mainProduct_shop"  ></property>
+		<property name="picture_shop"  ></property>
+		<property name="condition_shop"  ></property>
+
+		
+		<!-- 多对一 -->
+		<!-- 
+			name属性:引用属性名
+			column属性: 外键列名
+			class属性: 与我关联的对象完整类名
+		 -->
+		  <!-- 
+		 	级联操作:	cascade
+		 		save-update: 级联保存更新
+		 		delete:级联删除
+		 		all:save-update+delete
+		 	级联操作: 简化操作.目的就是为了少些两行代码.
+		  -->
+		  <!-- 多的一方: 不能放弃维护关系的.外键字段就在多的一方.  -->
+		  <!-- 一个农户对多个农场 -->
+		<many-to-one name="agent" column="id_dls_shop" class="Agent"  lazy="false">
+		</many-to-one>
+	</class>
+</hibernate-mapping>
